@@ -1,0 +1,35 @@
+{
+  "uk": {
+    "cases": [
+      { "patterns": ["вул%.", "вул", "вулиця"], "value": "вулиця" },
+      { "patterns": ["просп%.", "проспект"], "value": "проспект" },
+      { "patterns": ["пл%.", "площа"], "value": "площа" },
+      { "patterns": ["пров%.", "провулок", "пров"], "value": "провулок" },
+      { "patterns": ["бульв%.", "бульвар"], "value": "бульвар" },
+      { "patterns": ["набер%.", "набережна"], "value": "набережна" }
+    ],
+    "position": "prefix"
+  },
+  "ru": {
+    "cases": [
+      { "patterns": ["ул%.", "ул", "улица"], "value": "улица" },
+      { "patterns": ["просп%.", "проспект"], "value": "проспект" },
+      { "patterns": ["пл%.", "площадь"], "value": "площадь" },
+      { "patterns": ["переулок", "проулок"], "value": "переулок" },
+      { "patterns": ["бульв%.", "бульвар"], "value": "бульвар" },
+      { "patterns": ["набер%.", "набережная"], "value": "набережная" }
+    ],
+    "position": "prefix"
+  },
+  "en": {
+    "cases": [
+      { "patterns": ["St%.", "St", "Street", "street"], "value": "Street" },
+      { "patterns": ["Ave%.", "Ave", "Avenue", "avenue"], "value": "Avenue" },
+      { "patterns": ["Sq%.", "Sq", "Square", "square"], "value": "Square" },
+      { "patterns": ["Blvd%.", "Blvd", "Boulevard", "boulevard"], "value": "Boulevard" },
+      { "patterns": ["Ln%.", "Ln", "Lane", "lane"], "value": "Lane" },
+      { "patterns": ["Embankment", "embankment"], "value": "Embankment" }
+    ],
+    "position": "postfix"
+  }
+}

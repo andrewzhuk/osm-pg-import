@@ -8,7 +8,7 @@ DB_PORT="5432"  # default port
 
 # Path to the OSM file, lua style file and SQL script
 OSM_FILE="./ukraine-latest.osm.pbf"
-LUA_SCRIPT="./osm2pgsql.lua"
+LUA_SCRIPT="./main.lua"
 SQL_SCRIPT="./sql_update_ids.sql"
 
 # Create database

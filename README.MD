@@ -35,5 +35,24 @@ cd osm-data-integration-tool
 bash ./run_osm_import.sh
 ```
 
+# Update the data
+
+```bush
+bash ./run_osm_update.sh
+```
+
+
+### Motivation
+
+The **OSM Data Integration Tool** was created to simplify the process of importing and updating OpenStreetMap data in a PostgreSQL database. For creating delivery services, it is essential to have accurate and up-to-date geographic information about streets and roads. This tool automates the process of downloading and updating OSM data, ensuring that the data is always current and accurate.
+
+### Contributing
+
+Contributions are welcome! If you would like to contribute to the project, please create a pull request with your changes.
+
+### Support
+
+If you have any questions or need help with the project, please contact with me by submitting an issue.
+
 ### License
 This project is distributed under the MIT License, allowing free use, modification, and distribution of the code.
