@@ -23,11 +23,11 @@
   },
   "en": {
     "cases": [
-      { "patterns": ["St%.", "St", "Street", "street"], "value": "Street" },
-      { "patterns": ["Ave%.", "Ave", "Avenue", "avenue"], "value": "Avenue" },
-      { "patterns": ["Sq%.", "Sq", "Square", "square"], "value": "Square" },
-      { "patterns": ["Blvd%.", "Blvd", "Boulevard", "boulevard"], "value": "Boulevard" },
-      { "patterns": ["Ln%.", "Ln", "Lane", "lane"], "value": "Lane" },
+      { "patterns": ["st%.", "St%.", "st", "St", "Street", "street"], "value": "Street" },
+      { "patterns": ["ave%.", "Ave%.", "Ave", "Avenue", "avenue"], "value": "Avenue" },
+      { "patterns": ["sq%.", "Sq%.", "Sq", "Square", "square"], "value": "Square" },
+      { "patterns": ["blvd%.", "Blvd%.", "Blvd", "Boulevard", "boulevard"], "value": "Boulevard" },
+      { "patterns": ["ln%.", "Ln%.", "Ln", "Lane", "lane"], "value": "Lane" },
       { "patterns": ["Embankment", "embankment"], "value": "Embankment" }
     ],
     "position": "postfix"

@@ -1,2 +1,8 @@
+# Macos files
+.DS_Store
+# Data files of OpenStreetMap (OSM)
 *.osm.pbf
 /replication
+# Python test artifacts
+__pycache__/
+*.pyc

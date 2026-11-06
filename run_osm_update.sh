@@ -1,34 +1,19 @@
-#!/bin/bash
-
-# Parameters for connecting to the database
-DB_NAME="ukraine"
-DB_USER="andrewzhuk"
-DB_HOST="localhost"
-DB_PORT="5432" # default port
-
-# Path to the replication directory and URL
-REPLICATION_DIR="./replication"
-REPLICATION_URL="https://planet.openstreetmap.org/replication/minute"
-
-# Path to the lua style file
-LUA_SCRIPT="./osm2pgsql.lua"
-
-# Ensure the replication directory exists
-mkdir -p "$REPLICATION_DIR"
-
-# Download the latest state file
-wget -O "$REPLICATION_DIR/state.txt" "$REPLICATION_URL/state.txt"
-
-# Apply the diff files
-osmosis --read-replication-interval workingDirectory="$REPLICATION_DIR" \
-        --simplify-change --write-xml-change "$REPLICATION_DIR/changes.osc.gz"
-
-osm2pgsql -d "$DB_NAME" -U "$DB_USER" -H "$DB_HOST" -P "$DB_PORT" --slim -C 2500 --output=flex --style="$LUA_SCRIPT" --append "$REPLICATION_DIR/changes.osc.gz" -v
-
-# Check if osm2pgsql import was successful
-if [ $? -eq 0 ]
-then
-  echo "osm2pgsql update completed successfully."
+#!/usr/bin/env bash
+set -euo pipefail
+source "$(dirname -- "${BASH_SOURCE[0]}")/scripts/common.sh"
+[[ $# == 0 || ( $# == 1 && "$1" == --init ) ]] || fail 'Usage: bash run_osm_update.sh [--init]'
+[[ "$CACHE_MB" =~ ^[0-9]+$ ]] || fail 'CACHE_MB must be a nonnegative integer'
+MAX_DIFF_SIZE="${MAX_DIFF_SIZE:-10}"
+[[ "$MAX_DIFF_SIZE" =~ ^[1-9][0-9]*$ ]] || fail 'MAX_DIFF_SIZE must be a positive integer (MB)'
+for cmd in osm2pgsql osm2pgsql-replication psql; do require_command "$cmd"; done
+lock_database
+check_schema
+if [[ "${1:-}" == --init ]]; then
+  init_replication
 else
-  echo "Error during osm2pgsql update."
+  # Run postprocessing BEFORE the replication tool advances its checkpoint.
+  # A SQL failure makes the update fail and allows the same diff to be retried.
+  osm2pgsql-replication update "${DB_ARGS[@]}" --max-diff-size "$MAX_DIFF_SIZE" \
+    --post-processing "$PROJECT_DIR/scripts/postprocess.sh" -- \
+    --slim -C "$CACHE_MB" --output=flex --style="$LUA_SCRIPT"
 fi
